@@ -2,6 +2,7 @@
     margin: 0;
     padding: 0;
     font-family: Arial, Helvetica, sans-serif;
+    list-style: none;
 }
 
 header {
@@ -11,4 +12,54 @@ header {
     height: 60px;
     text-align: center;
     padding: 7px;
+}
+
+h1,
+h2,
+h3 {
+    font-weight: bold;
+}
+
+button {
+    margin-top: 10px;
+    background-color: lightblue;
+    border-radius: 6px;
+    width: 56%;
+    transition-duration: 0.4s;
+}
+
+button:hover {
+    background-color: rgb(192, 235, 249);
+}
+
+button:active {
+    transition: none;
+    background-color: rgb(114, 219, 254)
+}
+
+hr {
+    border: 1px solid black;
+    width: 56%;
+    margin: 20px auto 10px;
+}
+
+.mainBody {
+    margin: 0;
+}
+
+.searchArea {
+    width: 100%;
+    text-align: center;
+    margin-top: 10px;
+}
+
+.searchArea input {
+    width: 56%;
+    border-radius: 3px;
+    text-align: center;
+}
+
+.forecasts {
+    margin: 10px;
+    border: 3px solid blue;
 }
