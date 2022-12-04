@@ -63,11 +63,16 @@ hr {
     border: 3px solid blue;
 }
 
+.currentFC {
+    font-weight: bold;
+}
+
+.currentTitle {
+    font-size: 130%;
+}
+
 .icon {
     height: 50px;
     width: 50px;
 }
 
-.currentFC {
-    font-weight: bold;
-}

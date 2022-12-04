@@ -40,6 +40,9 @@ function currentDay(data, city) {
     var currentyCityEl = document.getElementById("currentCity");
     var currentDateEl = document.getElementById("currentDate");
     var currentIconEl = document.getElementById("currentIcon");
+    var currentTempEl = document.getElementById("currentTemp");
+    var currentHumidityEl = document.getElementById("currentHumidity");
+    var currentWindEl = document.getElementById("currentWind");
 
     console.log("Current Day Function");
     console.log(date.toLocaleDateString("en-US"));
@@ -47,6 +50,9 @@ function currentDay(data, city) {
     currentyCityEl.textContent = city;
     currentDateEl.textContent = date.toLocaleDateString("en-US");
     currentIconEl.setAttribute("src", "https://openweathermap.org/img/wn/"+ icon + "@2x.png");
+    currentTempEl.textContent = data.current.temp;
+    currentHumidityEl.textContent = data.current.humidity;
+    currentWindEl.textContent = data.current.wind_speed;
 }
 
 // TODO: Function to display 5-day forecast
