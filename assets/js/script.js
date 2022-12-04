@@ -19,6 +19,7 @@ function convertSearch() {
     })
 };
 
+// Pulls weather data using the latitude and longitute generated in the convertSearch function
 function getWeatherData(lon, lat, city) {
     fetch("https://api.openweathermap.org/data/2.5/onecall?lat=" + lat + "&lon=" + lon + "&exclude=minutely&units=imperial&appid=3235f6ca43f152b21beee3053909231f")
     .then((response) => response.json())
@@ -28,8 +29,6 @@ function getWeatherData(lon, lat, city) {
         fiveDay(data);
     })
 }
-
-// TODO: Function to store user searches to localStorage and display the latest 5 on the page
 
 // Current weather function
 function currentDay(data, city) {
@@ -53,28 +52,27 @@ function currentDay(data, city) {
     currentWindEl.textContent = data.current.wind_speed;
 }
 
-// TODO: Function to display 5-day forecast
+// Function to display 5-day forecast
 function fiveDay(data) {
-    console.log("Five Day Function");
-
+    // For loop in order to update all 5 sections
     for (var i = 1; i < 6; i++) {
     var date = new Date((data.daily[i].dt*1000)-(data.timezone_offset*1000));
     var icon = data.daily[i].weather[0].icon;
-    console.log(date.toLocaleDateString("en-US"));
 
+    // Declare variables containing elements from the 5-day forecast section of the HTML
     var dateEl = document.getElementById("date" + i);
     var iconEl = document.getElementById("icon" + i);
     var tempEl = document.getElementById("temp" + i);
     var humidityEl = document.getElementById("humidity" + i);
     var windEl = document.getElementById("wind" + i);
 
+    // Display the results on the page
     dateEl.textContent = date.toLocaleDateString("en-US");
     iconEl.setAttribute("src", "https://openweathermap.org/img/wn/"+ icon + "@2x.png");
     tempEl.textContent = "Temp: " + data.daily[i].temp.day + "°F";
     humidityEl.textContent = "Humidity: " + data.daily[i].humidity + "%";
     windEl.textContent = "Wind Spd: " + data.daily[i].wind_speed + "mph";
     }
-
 }
 
 // Event listeners
