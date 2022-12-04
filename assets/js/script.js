@@ -13,11 +13,17 @@ var searchBtn = document.getElementById("searchBtn");
 function search() {
     var input = document.getElementById("input").value;
     console.log(input);
+    currentDay(input);
 };
 
 // TODO: Function to store user searches to localStorage and display the latest 5 on the page
 
 // TODO: Function to display current day forecast
+function currentDay(input) {
+    fetch("https://api.openweathermap.org/data/2.5/weather?q=" + input + "&appid=" + key)
+    .then((response) => response.json())
+    .then((data) => console.log(data));
+}
 
 // TODO: Function to display 5-day forecast
 
