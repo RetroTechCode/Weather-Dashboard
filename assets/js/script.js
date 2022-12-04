@@ -13,16 +13,15 @@ var searchBtn = document.getElementById("searchBtn");
 function search() {
     var input = document.getElementById("input").value;
     console.log(input);
-    getWeatherData(input);
+    getCurrentWeatherData(input);
 };
 
-function getWeatherData(input) {
+function getCurrentWeatherData(input) {
     fetch("https://api.openweathermap.org/data/2.5/weather?q=" + input + "&units=imperial&appid=" + key)
     .then((response) => response.json())
     .then(function(data) {
         console.log(data);
         currentDay(data);
-        fiveDay(data);
     })
 }
 
@@ -30,7 +29,19 @@ function getWeatherData(input) {
 
 // TODO: Function to display current day forecast
 function currentDay(data) {
+    var date = new Date((data.dt*1000)-(data.timezone*1000))
+    var icon = data.weather[0].icon;
+
+    var currentyCityEl = document.getElementById("currentCity");
+    var currentDateEl = document.getElementById("currentDate");
+    var currentIconEl = document.getElementById("currentIcon");
+
     console.log("Current Day Function");
+    console.log(date.toLocaleDateString("en-US"));
+
+    currentyCityEl.textContent = data.name;
+    currentDateEl.textContent = date.toLocaleDateString("en-US");
+    currentIconEl.setAttribute("src", "https://openweathermap.org/img/wn/"+ icon + "@2x.png");
 }
 
 // TODO: Function to display 5-day forecast
