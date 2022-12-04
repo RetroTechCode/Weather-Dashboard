@@ -8,7 +8,7 @@
 header {
     color: white;
     font-size: 120%;
-    background-image: linear-gradient(blue, rgb(78, 0, 162));
+    background-image: linear-gradient(rgb(0, 170, 255), rgb(14, 2, 239));
     height: 60px;
     text-align: center;
     padding: 7px;
@@ -25,16 +25,15 @@ button {
     background-color: lightblue;
     border-radius: 6px;
     width: 56%;
-    transition-duration: 0.4s;
 }
 
 button:hover {
-    background-color: rgb(192, 235, 249);
+    background-color: rgb(214, 245, 255);
 }
 
 button:active {
     transition: none;
-    background-color: rgb(114, 219, 254)
+    background-color: rgb(130, 223, 255)
 }
 
 hr {
