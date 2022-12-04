@@ -70,9 +70,9 @@ function fiveDay(data) {
 
     dateEl.textContent = date.toLocaleDateString("en-US");
     iconEl.setAttribute("src", "https://openweathermap.org/img/wn/"+ icon + "@2x.png");
-    tempEl.textContent = data.daily[i].temp.day;
-    humidityEl.textContent = data.daily[i].humidity;
-    windEl.textContent = data.daily[i].wind_speed;
+    tempEl.textContent = "Temp: " + data.daily[i].temp.day + "°F";
+    humidityEl.textContent = "Humidity: " + data.daily[i].humidity + "%";
+    windEl.textContent = "Wind Spd: " + data.daily[i].wind_speed + "mph";
     }
 
 }
