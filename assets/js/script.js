@@ -2,35 +2,40 @@
 //       likely going to be simply creating a new variable referencing the name of the city from
 //       a localStorage array.
 
-
-// Global variables
-var key = "b539f961ee018c36b88d3838ba7bcfc2";
-
 // Global page elements
 var searchBtn = document.getElementById("searchBtn");
 
-// Main function to search for a city
-function search() {
-    var input = document.getElementById("input").value;
+// Convert city name into latitude and longitude
+function convertSearch() {
+    var input = document.getElementById("input").value.trim();
     console.log(input);
-    getCurrentWeatherData(input);
+
+    fetch("https://api.openweathermap.org/geo/1.0/direct?q="+ input + "&limit=1&appid=b539f961ee018c36b88d3838ba7bcfc2")
+    .then((response) => response.json())
+    .then(function(data) {
+        var lon = data[0].lon;
+        var lat = data[0].lat;
+        var city = data[0].name;
+        getWeatherData(lon, lat, city);
+    })
 };
 
-function getCurrentWeatherData(input) {
-    fetch("https://api.openweathermap.org/data/2.5/weather?q=" + input + "&units=imperial&appid=" + key)
+
+function getWeatherData(lon, lat, city) {
+    fetch("https://api.openweathermap.org/data/2.5/onecall?lat=" + lat + "&lon=" + lon + "&exclude=minutely&units=imperial&appid=3235f6ca43f152b21beee3053909231f")
     .then((response) => response.json())
     .then(function(data) {
         console.log(data);
-        currentDay(data);
+        currentDay(data, city);
     })
 }
 
 // TODO: Function to store user searches to localStorage and display the latest 5 on the page
 
 // TODO: Function to display current day forecast
-function currentDay(data) {
-    var date = new Date((data.dt*1000)-(data.timezone*1000))
-    var icon = data.weather[0].icon;
+function currentDay(data, city) {
+    var date = new Date((data.current.dt*1000)-(data.timezone_offset*1000))
+    var icon = data.current.weather[0].icon;
 
     var currentyCityEl = document.getElementById("currentCity");
     var currentDateEl = document.getElementById("currentDate");
@@ -39,7 +44,7 @@ function currentDay(data) {
     console.log("Current Day Function");
     console.log(date.toLocaleDateString("en-US"));
 
-    currentyCityEl.textContent = data.name;
+    currentyCityEl.textContent = city;
     currentDateEl.textContent = date.toLocaleDateString("en-US");
     currentIconEl.setAttribute("src", "https://openweathermap.org/img/wn/"+ icon + "@2x.png");
 }
@@ -50,4 +55,4 @@ function fiveDay(data) {
 }
 
 // Event listeners
-searchBtn.addEventListener("click", search);
+searchBtn.addEventListener("click", convertSearch);
