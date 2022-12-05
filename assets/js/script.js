@@ -1,11 +1,31 @@
 // Global page elements
 var searchBtn = document.getElementById("searchBtn");
 var forecastsEl = document.getElementById("forecasts");
+
+// Global variables
 var historyArray = loadHistory();
 
-// Convert city name into latitude and longitude
+// Convert city name into latitude and longitude when searching using the input box
 function convertSearch() {
     var input = document.getElementById("input").value.trim();
+
+    fetch("https://api.openweathermap.org/geo/1.0/direct?q=" + input + "&limit=1&appid=b539f961ee018c36b88d3838ba7bcfc2")
+        .then((response) => response.json())
+        .then(function (data) {
+            var lon = data[0].lon;
+            var lat = data[0].lat;
+            var city = data[0].name;
+            getWeatherData(lon, lat, city);
+            saveHistory(city);
+            updateHistory();
+        })
+};
+
+// Convert city name into latitude and longitude when searching using the search history
+function convertHistorySearch(input) {
+    console.log(input);
+    console.log(input.textContent);
+    var input = input.textContent;
 
     fetch("https://api.openweathermap.org/geo/1.0/direct?q=" + input + "&limit=1&appid=b539f961ee018c36b88d3838ba7bcfc2")
         .then((response) => response.json())
@@ -112,6 +132,11 @@ function updateHistory() {
 
             // Display the search history in the given button
             historyBtn.textContent = historyArray[i];
+
+            historyBtn.setAttribute("value", historyBtn.textContent);
+            console.log(historyBtn.value);
+
+            historyBtn.addEventListener("click", function() {convertHistorySearch(event.target)});
         }
     }
 }
