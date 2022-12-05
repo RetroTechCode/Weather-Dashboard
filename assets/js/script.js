@@ -18,6 +18,7 @@ function convertSearch() {
             getWeatherData(lon, lat, city);
             saveHistory(city);
             updateHistory();
+            document.getElementById("input").value = "";
         })
 };
 
