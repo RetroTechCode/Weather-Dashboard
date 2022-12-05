@@ -104,14 +104,14 @@ function loadHistory() {
 }
 
 function updateHistory() {
-    for (var i = 0; i < 5; i++) {
-        var historyBtn = document.getElementById("btn" + i);
-        if (!historyArray.i) {
-            console.log("UPDATE BUTTON");
+    // Only run if there is something in the historyArray
+    if (historyArray != null) {
+        for (var i = 0; i < historyArray.length; i++) {
+            // Update the historyBtn element on each loop
+            var historyBtn = document.getElementById("btn" + i);
+
+            // Display the search history in the given button
             historyBtn.textContent = historyArray[i];
-        } else if (historyArray.i) {
-            historyBtn.textContent = "--";
-            console.log(historyArray.i);
         }
     }
 }
@@ -124,5 +124,6 @@ input.addEventListener("keypress", function (event) {
     }
 });
 
+// Functions to run on initial page load
 loadHistory();
 updateHistory();
