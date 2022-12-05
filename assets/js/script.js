@@ -4,6 +4,7 @@
 
 // Global page elements
 var searchBtn = document.getElementById("searchBtn");
+var forecastsEl = document.getElementById("forecasts");
 
 // Convert city name into latitude and longitude
 function convertSearch() {
@@ -16,6 +17,7 @@ function convertSearch() {
         var lat = data[0].lat;
         var city = data[0].name;
         getWeatherData(lon, lat, city);
+        saveHistory(input);
     })
 };
 
@@ -72,7 +74,15 @@ function fiveDay(data) {
     tempEl.textContent = "Temp: " + data.daily[i].temp.day + "°F";
     humidityEl.textContent = "Humidity: " + data.daily[i].humidity + "%";
     windEl.textContent = "Wind Spd: " + data.daily[i].wind_speed + "mph";
+
+    // Unhides the forecast section of the page once everything else has finished populating
+    forecastsEl.classList.remove("hidden");
     }
+}
+
+function saveHistory(input) {
+    console.log("Save History Success");
+    localStorage.setItem("history", input)
 }
 
 // Event listeners

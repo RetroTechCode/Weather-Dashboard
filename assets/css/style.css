@@ -43,6 +43,10 @@ hr {
     margin: 20px auto 10px;
 }
 
+.hidden {
+    display: none;
+}
+
 .mainBody {
     margin: 0;
 }
@@ -59,8 +63,10 @@ hr {
     text-align: center;
 }
 
-.forecasts {
-    margin: 10px;
+.icon {
+    height: 50px;
+    width: 50px;
+    justify-content: center;
 }
 
 .currentTitle {
@@ -76,9 +82,6 @@ hr {
     box-shadow: rgb(102, 102, 102) 3px 3px;
 }
 
-.icon {
-    height: 50px;
-    width: 50px;
-    justify-content: center;
+#forecasts {
+    margin: 10px;
 }
-
