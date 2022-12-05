@@ -15,7 +15,7 @@ function convertSearch() {
             var city = data[0].name;
             getWeatherData(lon, lat, city);
             saveHistory(city);
-            input.value = "";
+            updateHistory();
         })
 };
 
@@ -103,6 +103,19 @@ function loadHistory() {
     return historyArray;
 }
 
+function updateHistory() {
+    for (var i = 0; i < 5; i++) {
+        var historyBtn = document.getElementById("btn" + i);
+        if (!historyArray.i) {
+            console.log("UPDATE BUTTON");
+            historyBtn.textContent = historyArray[i];
+        } else if (historyArray.i) {
+            historyBtn.textContent = "--";
+            console.log(historyArray.i);
+        }
+    }
+}
+
 // Event listeners
 searchBtn.addEventListener("click", convertSearch);
 input.addEventListener("keypress", function (event) {
@@ -112,3 +125,4 @@ input.addEventListener("keypress", function (event) {
 });
 
 loadHistory();
+updateHistory();
