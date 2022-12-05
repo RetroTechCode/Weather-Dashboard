@@ -22,10 +22,8 @@ function convertSearch() {
 };
 
 // Convert city name into latitude and longitude when searching using the search history
-function convertHistorySearch(input) {
-    console.log(input);
-    console.log(input.textContent);
-    var input = input.textContent;
+function convertHistorySearch(historyBtnInfo) {
+    var input = historyBtnInfo.textContent;
 
     fetch("https://api.openweathermap.org/geo/1.0/direct?q=" + input + "&limit=1&appid=b539f961ee018c36b88d3838ba7bcfc2")
         .then((response) => response.json())
@@ -34,8 +32,6 @@ function convertHistorySearch(input) {
             var lat = data[0].lat;
             var city = data[0].name;
             getWeatherData(lon, lat, city);
-            saveHistory(city);
-            updateHistory();
         })
 };
 
@@ -133,9 +129,7 @@ function updateHistory() {
             // Display the search history in the given button
             historyBtn.textContent = historyArray[i];
 
-            historyBtn.setAttribute("value", historyBtn.textContent);
-            console.log(historyBtn.value);
-
+            // Add event listener and pass on the button's properties to the convertHistorySearch function
             historyBtn.addEventListener("click", function() {convertHistorySearch(event.target)});
         }
     }
